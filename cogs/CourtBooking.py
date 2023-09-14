@@ -14,13 +14,15 @@ async def run_subprocess(month, day, time, am_pm, token, ctx) -> None:
             stderr=asyncio.subprocess.PIPE,
             text=False
         )
-        await ctx.channel.send(f'Scheduled to book on {month}/{day} at {time}{am_pm}.')
+        await ctx.channel.send(f'{ctx.author.mention} is booking {month}/{day} at {time}{am_pm}.')
         while True:
             output = await process.stdout.readline()
             if not output:
                 break
             print(output.decode().strip())
+
         await ctx.channel.send(f'{ctx.author.mention}, Booking Successful!')
+
         # !TODO: check if the court is actually booked before sending the booking successful message.
     except Exception as e:
         await ctx.channel.send(f'Error: {e}')
@@ -54,6 +56,7 @@ class BookCourt(commands.Cog):
         token = parameter[4]
 
         if await check_parameters(month, day, time, am_pm, ctx):
+            await ctx.channel.purge(limit=1)
             await run_subprocess(month, day, time, am_pm, token, ctx)
 
 
