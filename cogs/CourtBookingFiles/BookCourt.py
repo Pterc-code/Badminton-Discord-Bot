@@ -1,4 +1,4 @@
-import sys
+import sys, threading
 
 global application_cookie
 month, day, book_hours, am_or_pms, book_person, application_cookie = sys.argv[1:]
@@ -86,13 +86,10 @@ def get_timeslot_string(string: str, hour: int, AMPM: str):
     print(string)
     assert False
 
-
-def book_courts(book_hour, am_or_pm, court_id, fid):
-    print("start booking courts")
+def book_court():
     data_apt_id = []
     data_timeslot_id = []
-    data_timeslotinstance_id = []
-    time.sleep(0.9)  # 0.8
+    time.sleep(0.9)
     t0 = time.time()
     while len(data_apt_id) == 0 and time.time() - t0 < 10:
         x = requests.get('https://recreation.utoronto.ca/booking/%s/slots/%s/2023/%s' % (court_id, fid, booking_date),
@@ -155,6 +152,13 @@ def book_courts(book_hour, am_or_pm, court_id, fid):
             # time.sleep(0.05) #This line can be removed if need to aggressively compete with other bots.
 
 
+
+def book_courts(book_hour, am_or_pm, court_id, fid):
+    print("start booking courts")
+    for i in range(10):
+        threading.Thread(target=book_court).start()
+
+
 def end_schedule():
     assert False
 
@@ -203,5 +207,5 @@ for i, (book_hour, am_or_pm) in enumerate(zip(book_hours, am_or_pms)):
 
 while True:
     schedule.run_pending()
-    time.sleep(0.01)
+    time.sleep(0.1)
 
