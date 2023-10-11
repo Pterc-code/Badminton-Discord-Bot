@@ -15,7 +15,7 @@ async def run_subprocess(month, day, time, am_pm, token, ctx) -> None:
             text=False
         )
         await ctx.channel.send(f'{ctx.author.mention} is booking {month}/{day} at {time}{am_pm}.')
-        while True:
+        while True: 
             output = await process.stdout.readline()
             if not output:
                 break
@@ -54,7 +54,7 @@ class BookCourt(commands.Cog):
         time = parameter[2]
         am_pm = parameter[3]
         token = parameter[4]
-
+        # !TODO: ping the recreation.utoronto.ca and check if there are courts at that time and give error resposen if not present
         if await check_parameters(month, day, time, am_pm, ctx):
             await ctx.channel.purge(limit=1)
             await run_subprocess(month, day, time, am_pm, token, ctx)

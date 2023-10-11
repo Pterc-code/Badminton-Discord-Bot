@@ -83,7 +83,7 @@ def get_timeslot_string(string: str, hour: int, AMPM: str):
             return split
     # if we end up here then there is no timeslot, this could be caused by authentication is stripping out of sync and so should kill the program since no valid authentication is available at this point.
     print("Warning: timeslot %d%s not found on page." % (hour, AMPM))
-    print(string)
+    # print(string)
     assert False
 
 def book_court():
@@ -91,7 +91,7 @@ def book_court():
     data_timeslot_id = []
     time.sleep(0.9)
     t0 = time.time()
-    while len(data_apt_id) == 0 and time.time() - t0 < 10:
+    while len(data_apt_id) == 0 and time.time() - t0 < 300:
         x = requests.get('https://recreation.utoronto.ca/booking/%s/slots/%s/2023/%s' % (court_id, fid, booking_date),
                          headers={"accept": "*/*",
                                   "accept-encoding": "gzip, deflate, br",
@@ -140,7 +140,7 @@ def book_court():
                                              "x-requested-with": "XMLHttpRequest",
                                              "cookie": ".AspNet.ApplicationCookie=%s" % application_cookie,
                                              }, data=data)
-            print(data)
+            # print(data)
             print("finished sending request")
             print(datetime.now())
             print(booking.text)
@@ -148,7 +148,7 @@ def book_court():
         else:
             print("no data yet.")
             print(datetime.now())
-            print(timeslot_string)
+            # print(timeslot_string)
             # time.sleep(0.05) #This line can be removed if need to aggressively compete with other bots.
 
 
@@ -164,7 +164,7 @@ def end_schedule():
 
 
 schedule.clear()
-schedule.every(5).minutes.do(update_application_cookie)
+schedule.every(1).minutes.do(update_application_cookie)
 
 for i, (book_hour, am_or_pm) in enumerate(zip(book_hours, am_or_pms)):
     if book_person == '1':
