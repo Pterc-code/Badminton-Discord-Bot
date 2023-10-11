@@ -12,7 +12,9 @@ load_dotenv()
 client = commands.Bot(command_prefix="!", intents=discord.Intents.all())
 
 # Bot token
-TOKEN = os.environ.get('BOT_TOKEN')
+# TOKEN = os.environ.get('BOT_TOKEN')
+
+TOKEN="MTE0OTgyODIwODA5MTQ2MzgxMQ.Gl0Jlj.1T_EDYaW3CH5YyzKg8GWahrvx62-ECOjd5yZVw"
 
 
 # Basic Commands
