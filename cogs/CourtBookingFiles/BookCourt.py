@@ -91,7 +91,7 @@ def book_court():
     data_timeslot_id = []
     time.sleep(0.9)
     t0 = time.time()
-    while len(data_apt_id) == 0 and time.time() - t0 < 300:
+    while len(data_apt_id) == 0 and time.time() - t0 < 150:
         x = requests.get('https://recreation.utoronto.ca/booking/%s/slots/%s/2023/%s' % (court_id, fid, booking_date),
                          headers={"accept": "*/*",
                                   "accept-encoding": "gzip, deflate, br",
