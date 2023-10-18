@@ -155,8 +155,9 @@ def book_court():
 
 def book_courts(book_hour, am_or_pm, court_id, fid):
     print("start booking courts")
-    for i in range(10):
-        threading.Thread(target=book_court).start()
+    book_court()
+    # for i in range(10):
+    #     threading.Thread(target=book_court).start()
 
 
 def end_schedule():
