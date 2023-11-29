@@ -23,7 +23,6 @@ async def run_subprocess(month, day, time, am_pm, token, ctx) -> None:
 
         await ctx.channel.send(f'{ctx.author.mention}, Booking Successful!')
 
-        # !TODO: check if the court is actually booked before sending the booking successful message.
     except Exception as e:
         await ctx.channel.send(f'Error: {e}')
 
