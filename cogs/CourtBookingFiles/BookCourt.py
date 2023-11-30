@@ -310,7 +310,7 @@ for i, (book_hour, am_or_pm) in enumerate(zip(book_hours, am_or_pms)):
             court_id = court2_id
             fid = court2_fid
 
-    schedule.every().day.at("%02d:59:59" % (time_12to24[(book_hour, am_or_pm)] - 1)).do(book_courts,
+    schedule.every().day.at("%02d:59:58" % (time_12to24[(book_hour, am_or_pm)] - 1)).do(book_courts,
                                                                                         book_hour=book_hour,
                                                                                         am_or_pm=am_or_pm,
                                                                                         court_id=court_id, fid=fid)
