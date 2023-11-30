@@ -315,7 +315,7 @@ for i, (book_hour, am_or_pm) in enumerate(zip(book_hours, am_or_pms)):
                                                                                         am_or_pm=am_or_pm,
                                                                                         court_id=court_id, fid=fid)
     if i == len(book_hours) - 1:
-        schedule.every().day.at("%02d:00:10" % (time_12to24[(book_hour, am_or_pm)])).do(end_schedule)
+        schedule.every().day.at("%02d:00:01" % (time_12to24[(book_hour, am_or_pm)])).do(end_schedule)
 
 while True:
     schedule.run_pending()
