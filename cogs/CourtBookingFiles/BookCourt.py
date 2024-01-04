@@ -8,7 +8,7 @@ for s in am_or_pms:
     assert s in ["AM", "PM"]
 assert len(book_hours) == len(am_or_pms)
 assert book_person in ['1', '2', '3']
-year = '2023'
+year = '2024'
 time_12to24 = {(hour, AMPM): hour + (0 if AMPM == "AM" or hour == 12 else 12) for hour in range(1, 13) for AMPM in
                ["AM", "PM"]}
 booking_date = '%s/%s' % (month, day)
@@ -28,7 +28,7 @@ def update_application_cookie():
     print("updating cookie")
     global application_cookie
     x = requests.get(
-        'https://recreation.utoronto.ca/booking/33215bab-05b9-41de-be04-c9ae496d5609/slots/4c99c8bd-f117-4603-bba6-c8e2e9614799/2023/%s' % booking_date,
+        'https://recreation.utoronto.ca/booking/33215bab-05b9-41de-be04-c9ae496d5609/slots/4c99c8bd-f117-4603-bba6-c8e2e9614799/2024/%s' % booking_date,
         headers={"accept": "*/*",
                  "accept-encoding": "gzip, deflate, br",
                  "accept-language": "en-GB,en;q=0.9,en-US;q=0.8,zh-CN;q=0.7,zh;q=0.6,zh-TW;q=0.5,und;q=0.4",
@@ -96,7 +96,7 @@ def book_court():
     while len(data_apt_id2) == 0 and time.time() - t0 < 5:
 
         # Dumb way to book all three courts -- but it worked anyways
-        request1 = requests.get('https://recreation.utoronto.ca/booking/%s/slots/%s/2023/%s' % (court1_id, court1_fid, booking_date),
+        request1 = requests.get('https://recreation.utoronto.ca/booking/%s/slots/%s/2024/%s' % (court1_id, court1_fid, booking_date),
                          headers={"accept": "*/*",
                                   "accept-encoding": "gzip, deflate, br",
                                   "accept-language": "en-GB,en;q=0.9,en-US;q=0.8,zh-CN;q=0.7,zh;q=0.6,zh-TW;q=0.5,und;q=0.4",
@@ -113,7 +113,7 @@ def book_court():
                                   })
 
         request2 = requests.get(
-            'https://recreation.utoronto.ca/booking/%s/slots/%s/2023/%s' % (court2_id, court2_fid, booking_date),
+            'https://recreation.utoronto.ca/booking/%s/slots/%s/2024/%s' % (court2_id, court2_fid, booking_date),
             headers={"accept": "*/*",
                      "accept-encoding": "gzip, deflate, br",
                      "accept-language": "en-GB,en;q=0.9,en-US;q=0.8,zh-CN;q=0.7,zh;q=0.6,zh-TW;q=0.5,und;q=0.4",
@@ -130,7 +130,7 @@ def book_court():
                      })
 
         request3 = requests.get(
-            'https://recreation.utoronto.ca/booking/%s/slots/%s/2023/%s' % (court3_id, court3_fid, booking_date),
+            'https://recreation.utoronto.ca/booking/%s/slots/%s/2024/%s' % (court3_id, court3_fid, booking_date),
             headers={"accept": "*/*",
                      "accept-encoding": "gzip, deflate, br",
                      "accept-language": "en-GB,en;q=0.9,en-US;q=0.8,zh-CN;q=0.7,zh;q=0.6,zh-TW;q=0.5,und;q=0.4",
