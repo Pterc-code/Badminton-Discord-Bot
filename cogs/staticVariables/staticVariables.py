@@ -1,0 +1,6 @@
+court1_id = '33215bab-05b9-41de-be04-c9ae496d5609'
+court1_fid = '4c99c8bd-f117-4603-bba6-c8e2e9614799'
+court2_id = '33215bab-05b9-41de-be04-c9ae496d5609'
+court2_fid = '9f64ef55-8eba-4a7a-99d1-1c94d7478b1c'
+court3_id = '33215bab-05b9-41de-be04-c9ae496d5609'
+court3_fid = '59d31228-780c-49bc-8454-d6cbd093277c'
