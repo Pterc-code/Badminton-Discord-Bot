@@ -17,8 +17,8 @@ def update_application_cookie():
             'https://recreation.utoronto.ca/booking/33215bab-05b9-41de-be04-c9ae496d5609/slots/4c99c8bd-f117-4603-bba6-c8e2e9614799/2024/%s')
         updated_cookie = x.cookies.get_dict().get('.AspNet.ApplicationCookie')
         application_cookie = application_cookie if updated_cookie is None else updated_cookie
-    except:
-        pass
+    except Exception as e:
+            print(f"An error occurred: {e}")
 
 
 schedule.every(1).minutes.do(update_application_cookie)
@@ -87,9 +87,7 @@ def get_court_hours(court_data, day, month):
         data = pq('div.booking-slot-item').text()
         data = data.strip().split('\n')[1:]
         # Get the current time
-        current_time = datetime.now()
-
-        compare_time = current_time.replace(day=int(day))
+        current_time = datetime.now().replace(minute=0, day=int(day))
 
         # Iterate through the lines and extract time and availability for PM slots
         for j in range(0, len(data), 2):
@@ -103,7 +101,7 @@ def get_court_hours(court_data, day, month):
                     minute=0
                 )
 
-                if time < compare_time:
+                if current_time < time:
                     pm_data.append((i + 1, data[j], data[j + 1], day, month))
 
     return pm_data
@@ -112,12 +110,10 @@ def get_court_hours(court_data, day, month):
 async def notify_user(pm_data, ctx):
     court = False
     for i in range(len(pm_data)):
-        print(pm_data)
         if "1 spot available" in pm_data[i][2]:
             court = True
             await ctx.channel.send(
                 f'{ctx.author.mention} Court {pm_data[i][0]} on {pm_data[i][4]}/{pm_data[i][3]} at {pm_data[i][1]} is open for booking.')
-    print(court)
     return court
 
 
@@ -131,6 +127,8 @@ class CourtNotification(commands.Cog):
 
     @commands.command()
     async def notify(self, ctx) -> None:
+        await ctx.channel.purge(limit=1)
+
         global application_cookie
         self.ctx = ctx
         parameter = self.ctx.message.content[7:].split(" ")
@@ -139,9 +137,10 @@ class CourtNotification(commands.Cog):
         self.booking_date = '%s/%s' % (self.month, self.day)
         application_cookie = parameter[3]
 
+        await ctx.channel.send(f'{ctx.author.mention} is looking for courts on {self.month}/{self.day}.')
         await self.notification_task.start()
 
-    @tasks.loop(seconds=5)  # Run every minute
+    @tasks.loop(seconds=30)
     async def notification_task(self):
         try:
             # Setting variables

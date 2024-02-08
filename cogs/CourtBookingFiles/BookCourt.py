@@ -84,6 +84,7 @@ def get_timeslot_string(string: str, hour: int, AMPM: str):
     # print(string)
     assert False
 
+
 def book_court():
     data_apt_id1 = []
     data_apt_id2 = []
@@ -93,7 +94,7 @@ def book_court():
     data_timeslot_id3 = []
     time.sleep(0.05)
     t0 = time.time()
-    while len(data_apt_id2) == 0 and time.time() - t0 < 20:
+    while len(data_apt_id2) == 0 and time.time() - t0 < 500:
 
         # Dumb way to book all three courts -- but it worked anyways
         request1 = requests.get('https://recreation.utoronto.ca/booking/%s/slots/%s/2024/%s' % (court1_id, court1_fid, booking_date),
@@ -319,5 +320,5 @@ for i, (book_hour, am_or_pm) in enumerate(zip(book_hours, am_or_pms)):
 
 while True:
     schedule.run_pending()
-    time.sleep(0.1)
+    time.sleep(0.05)
 
