@@ -28,6 +28,15 @@ class BasicFunctions(commands.Cog):
                                           activity=discord.Game("Badminton"))
         print("Bot is online.")
 
+        # TELL JASON TO FIX BOT!
+        channel = self.client.get_channel(1153401124318105683)
+        jason = 368067940177936395
+        jason_mention = f"<@{jason}>"
+
+        await channel.send(f"{jason_mention} PLEASE FIX ME!!!")
+
+
+
     # Commands
     @commands.command()
     async def ping(self, ctx) -> None:
