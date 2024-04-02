@@ -94,7 +94,7 @@ def book_court():
     data_timeslot_id3 = []
     time.sleep(0.05)
     t0 = time.time()
-    while len(data_apt_id2) == 0 and time.time() - t0 < 500:
+    while len(data_apt_id2) == 0 and time.time() - t0 < 180000:
 
         # Dumb way to book all three courts -- but it worked anyways
         request1 = requests.get('https://recreation.utoronto.ca/booking/%s/slots/%s/2024/%s' % (court1_id, court1_fid, booking_date),
@@ -316,7 +316,7 @@ for i, (book_hour, am_or_pm) in enumerate(zip(book_hours, am_or_pms)):
                                                                                         am_or_pm=am_or_pm,
                                                                                         court_id=court_id, fid=fid)
     if i == len(book_hours) - 1:
-        schedule.every().day.at("%02d:03:01" % (time_12to24[(book_hour, am_or_pm)])).do(end_schedule)
+        schedule.every().day.at("%02d:02:01" % (time_12to24[(book_hour, am_or_pm)])).do(end_schedule)
 
 while True:
     schedule.run_pending()
