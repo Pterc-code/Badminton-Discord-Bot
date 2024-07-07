@@ -2,6 +2,13 @@ import sys
 
 global application_cookie
 month, day, book_hours, am_or_pms, book_person, application_cookie = sys.argv[1:]
+# month = 7
+# day = 7  
+# book_hours = "[6]"
+# am_or_pms = "[PM]"
+# book_person = "1"
+# application_cookie = "WSlHrgv5ffPeCn3PPp4O264VEP0qSylDoym-XmfI8jCdrXOcZlf6wskelQNQ1fq7DWqQWvyJZ-sd4KJSYh1oOcLCgVHel4KflaSQZpZ4RQ16ht2ro9qMIgfNupOgSjMQffb2ZkprQ5Q7APRrRB92NL7cyW10OATPVgHGgwhXjIgRq1gbKk_LjNA-DNEp2K5miLx9gz0evKj9x0Tb-NRkdUeSAhN7aSDS9-ByfA7tY6GmlmDqisFj3FjImCLGM-mtrQmL7pxDXLEauJhUbiIEkFCZtJ8ShG_2MCozhja2W_wr6whbe1dpdybIhrEUkXRozLTqN5mFl4f_6Y2N-EUBUWYag0sksp9CjwehAXc5t2XGh4WyFVDjIoUvBPXDHd14Wa7YmC9Vn_iJD6UnM0X2IQ"
+
 book_hours = [int(hour) for hour in book_hours.strip("[").strip("]").split(",")]
 am_or_pms = am_or_pms.strip("[").strip("]").split(",")
 for s in am_or_pms:
