@@ -1,7 +1,7 @@
 #To run file locally to book courts:
-    - 1. Clone this repo / download this repo
-    - 2. Then in your command prompt and cd to Badminton-Discord-Bot/cogs/CourtBookingFiles
-    - 3. Run python3 BookCourt.py month day "[time]" "[PM or AM]" "1" ".AspNet.ApplicationCookie"
+1. Clone this repo / download this repo
+2. Then in your command prompt and cd to Badminton-Discord-Bot/cogs/CourtBookingFiles
+3. Run python3 BookCourt.py month day "[time]" "[PM or AM]" "1" ".AspNet.ApplicationCookie"
 
     Note: to get the .AspNet.ApplicationCookie
     1. Login to recreation.utoronto.ca.
