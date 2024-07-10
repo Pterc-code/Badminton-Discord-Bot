@@ -166,8 +166,6 @@ def book_court():
         data_apt_id1 = extract_keyword(timeslot_string1, "data-apt-id")
         data_timeslot_id1 = extract_keyword(timeslot_string1, "data-timeslot-id")
 
-        print(timeslot_string1)
-
         timeslot_string2 = get_timeslot_string(request2.text, hour=book_hour, AMPM=am_or_pm)
         data_apt_id2 = extract_keyword(timeslot_string2, "data-apt-id")
         data_timeslot_id2 = extract_keyword(timeslot_string2, "data-timeslot-id")
@@ -255,7 +253,7 @@ for i, (book_hour, am_or_pm) in enumerate(zip(book_hours, am_or_pms)):
             court_id = court2_id
             fid = court2_fid
 
-    schedule.every().day.at("%02d:58:59" % (time_12to24[(book_hour, am_or_pm)] -1)).do(book_courts,
+    schedule.every().day.at("%02d:59:50" % (time_12to24[(book_hour, am_or_pm)] -1)).do(book_courts,
                                                                                         book_hour=book_hour,
                                                                                         am_or_pm=am_or_pm,
                                                                                         court_id=court_id, fid=fid)
