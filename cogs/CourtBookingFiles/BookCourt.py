@@ -53,10 +53,13 @@ def update_application_cookie():
                     "cookie": ".AspNet.ApplicationCookie=%s" % application_cookie,
                     })
         updated_cookie = x.cookies.get_dict().get('.AspNet.ApplicationCookie')
+        print(x.status_code)
         print(updated_cookie)
         application_cookie = application_cookie if updated_cookie is None else updated_cookie
     except Exception as e:
         print(f"Error updating cookie: {e}")
+
+update_application_cookie()
 
 # Used for pulling right before the hour, extract id, and book
 def extract_keyword(string, keyword):
@@ -92,7 +95,7 @@ def get_timeslot_string(string: str, hour: int, AMPM: str):
     # if we end up here then there is no timeslot, this could be caused by authentication is stripping out of sync and so should kill the program since no valid authentication is available at this point.
     print("Warning: timeslot %d%s not found on page." % (hour, AMPM))
     # print(string)
-    assert False
+    #assert False
 
 def get_court_request(court_id, court_fid):
     return requests.get('https://recreation.utoronto.ca/booking/%s/slots/%s/2024/%s' % (court_id, court_fid, booking_date),
@@ -257,8 +260,8 @@ for i, (book_hour, am_or_pm) in enumerate(zip(book_hours, am_or_pms)):
                                                                                         book_hour=book_hour,
                                                                                         am_or_pm=am_or_pm,
                                                                                         court_id=court_id, fid=fid)
-    if i == len(book_hours) - 1:
-        schedule.every().day.at("%02d:02:01" % (time_12to24[(book_hour, am_or_pm)])).do(end_schedule)
+
+    schedule.every().day.at("%02d:00:05" % (time_12to24[(book_hour, am_or_pm)])).do(end_schedule)
 
 while True:
     schedule.run_pending()
